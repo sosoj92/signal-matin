@@ -11,15 +11,13 @@ import json
 import secrets
 import socket
 import threading
-import time
+from collections.abc import Callable
 from dataclasses import dataclass
 from http import HTTPStatus
 from http.cookies import SimpleCookie
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from typing import Callable
 from urllib.parse import parse_qs, quote, urlsplit
-
 
 TOKEN_FILE = ".access-token"
 PAIRING_FILE = ".pairing-code.json"
@@ -52,7 +50,7 @@ def ensure_pairing_code(directory: Path, *, lifetime_minutes: int = 60) -> str:
     """Retourne un code court, temporaire et consommable une seule fois."""
     directory.mkdir(parents=True, exist_ok=True)
     path = directory / PAIRING_FILE
-    now = dt.datetime.now(dt.timezone.utc)
+    now = dt.datetime.now(dt.UTC)
     if path.exists():
         try:
             payload = json.loads(path.read_text(encoding="utf-8"))
@@ -79,7 +77,7 @@ def consume_pairing_code(directory: Path, supplied: str) -> bool:
         payload = json.loads(path.read_text(encoding="utf-8"))
         expires_at = dt.datetime.fromisoformat(str(payload["expires_at"]))
         valid = (
-            expires_at > dt.datetime.now(dt.timezone.utc)
+            expires_at > dt.datetime.now(dt.UTC)
             and secrets.compare_digest(str(payload["code"]), supplied)
         )
     except (KeyError, TypeError, ValueError, json.JSONDecodeError):
@@ -240,7 +238,7 @@ def make_handler(library: ReaderLibrary, token: str) -> type[BaseHTTPRequestHand
                 self._send(
                     HTTPStatus.UNAUTHORIZED,
                     "text/plain; charset=utf-8",
-                    "Lien invalide ou expiré.".encode("utf-8"),
+                    "Lien invalide ou expiré.".encode(),
                 )
                 return
             if request.path == "/":

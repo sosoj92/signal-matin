@@ -11,7 +11,6 @@ from pathlib import Path
 from .models import DigestItem, MorningEdition, NewsItem, TaskItem
 from .pdf import _launch_browser
 
-
 MONTHS = (
     "janvier", "février", "mars", "avril", "mai", "juin", "juillet",
     "août", "septembre", "octobre", "novembre", "décembre",
@@ -304,7 +303,7 @@ def generer_epub(edition: MorningEdition, path: Path) -> Path:
         uuid.NAMESPACE_URL,
         f"signal-matin:{edition.edition.date.isoformat()}:{edition.edition.title}",
     )
-    modified = edition.generated_at.astimezone(dt.timezone.utc).replace(microsecond=0)
+    modified = edition.generated_at.astimezone(dt.UTC).replace(microsecond=0)
     modified_text = modified.isoformat().replace("+00:00", "Z")
     manifest = []
     spine = []
