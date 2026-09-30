@@ -36,8 +36,9 @@ def available_printers() -> list[str]:
     lpstat = shutil.which("lpstat")
     if not lpstat:
         return []
-    result = subprocess.run([lpstat, "-p"], capture_output=True, text=True, check=False)
-    return [line.split()[1] for line in result.stdout.splitlines() if line.startswith("printer ")]
+    # `lpstat -p` est traduit selon la langue du système ; `-e` ne renvoie que les noms.
+    result = subprocess.run([lpstat, "-e"], capture_output=True, text=True, check=False)
+    return [line.strip() for line in result.stdout.splitlines() if line.strip()]
 
 
 def _choose(name: str) -> str:
