@@ -7,7 +7,7 @@ from signal_matin.mock_data import construire_demo
 from signal_matin.models import DensityMode
 from signal_matin.normalizer import normaliser_edition
 from signal_matin.pdf import generer_pdf, inspecter_html
-from signal_matin.renderer import render_html
+from signal_matin.renderer import _truncate, render_html
 
 
 EXPECTED_PAGES = {
@@ -129,3 +129,11 @@ def test_delayed_print_reuses_real_task_action():
     assert "$SourceAction.Execute" in script
     assert "$SourceAction.Arguments" in script
     assert "Start-ScheduledTask -TaskName $TacheSource" not in script
+
+
+def test_truncate_prefers_a_sentence_end():
+    text = "Première phrase assez longue pour compter. Deuxième phrase qui dépasse la limite."
+    assert _truncate(text, 60) == "Première phrase assez longue pour compter."
+    # Pas de fin de phrase utile : coupe au mot, avec points de suspension.
+    assert _truncate("Un. " + "mot " * 30, 40).endswith("...")
+    assert _truncate("Court.", 60) == "Court."
