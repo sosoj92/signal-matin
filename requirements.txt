@@ -2,5 +2,6 @@ icalendar>=6.1
 playwright>=1.48
 pydantic>=2.9
 pypdf>=5.0
+recurring-ical-events>=3.0
 python-dotenv>=1.0
 PyYAML>=6.0

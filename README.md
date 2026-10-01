@@ -302,6 +302,9 @@ calendar:
       source: "calendars/agenda.ics"
 ```
 
+Les événements récurrents (réunion chaque mardi, anniversaires…) sont dépliés
+pour le jour de l'édition, exceptions comprises.
+
 Une URL ICS peut donner accès à ton agenda : ne la publie jamais.
 
 ### Google Calendar
