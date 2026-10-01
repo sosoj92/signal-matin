@@ -376,7 +376,8 @@ paper:
 ```
 
 Le titre peut contenir un ou plusieurs mots. Le moteur adapte automatiquement
-le masthead, les en-têtes et les pieds de page.
+le masthead, les en-têtes et les pieds de page. Le mode démo les reprend aussi :
+`python main.py --preview --demo` montre ton journal renommé sans aucune source.
 
 ### Choisir ses rubriques
 
