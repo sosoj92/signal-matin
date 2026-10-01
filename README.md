@@ -476,6 +476,14 @@ signal-matin generate --demo --mode extended
 | `extended` | Plus de développements et de cahiers. |
 | `auto` | Choix d'après la quantité de contenu. |
 
+Pour garder la même densité chaque matin sans modifier la commande planifiée,
+fixe-la dans `config.yaml` ; `--mode` reste prioritaire quand il est précisé :
+
+```yaml
+paper:
+  density: "compact"
+```
+
 Le nombre final n'est pas rigide. Le moteur mesure les vraies pages dans
 Chromium. Si un article, une liste ou une rubrique déborde, il crée une page de
 suite, renumérote le journal et conserve un A4 lisible.

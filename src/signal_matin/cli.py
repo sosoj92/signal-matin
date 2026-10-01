@@ -149,6 +149,9 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     config = load_config(args.config)
+    if getattr(args, "mode", None) == "auto":
+        # Densité fixée dans config.yaml (paper.density), sinon choix automatique.
+        args.mode = str(setting(config, "paper.density", "auto") or "auto")
     if args.command == "auth-google":
         token = authorize_google(setting(config, "calendar.google", {}) or {}, ROOT)
         print(f"Jeton OAuth enregistre localement: {token}")

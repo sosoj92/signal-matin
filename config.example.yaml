@@ -5,6 +5,7 @@ paper:
   title: "Signal Matin"
   subtitle: "Le journal anti-scroll"
   motto: "Voir clair avant de voir l'écran."
+  density: "auto"   # auto, compact, standard ou extended
 
 modules:
   weather: true
