@@ -6,14 +6,28 @@ from pathlib import Path
 
 from .config import ROOT, setting
 from .connectors import (
-    collect_google_calendar, collect_ics, collect_rss, collect_tasks,
+    collect_google_calendar,
+    collect_ics,
+    collect_rss,
+    collect_tasks,
     collect_weather,
 )
 from .daily_learning import construire_apprentissage_du_jour
 from .models import (
-    DataSourceStatus, DataState, DigestItem, EditionMeta, Extras, Importance,
-    LearningPage, MorningEdition, NewsBundle, NewsItem, PersonalBlock, QuoteBlock,
-    Recommendation, SourceRef,
+    DataSourceStatus,
+    DataState,
+    DigestItem,
+    EditionMeta,
+    Extras,
+    Importance,
+    LearningPage,
+    MorningEdition,
+    NewsBundle,
+    NewsItem,
+    PersonalBlock,
+    QuoteBlock,
+    Recommendation,
+    SourceRef,
 )
 from .normalizer import normaliser_edition
 

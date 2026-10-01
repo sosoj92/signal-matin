@@ -51,11 +51,11 @@ def collect_ics(
         try:
             calendar = Calendar.from_ical(_read(source, root))
             for component in calendar.walk("VEVENT"):
-                start, all_day = _datetime(component.decoded("DTSTART"), now.tzinfo or dt.timezone.utc)
+                start, all_day = _datetime(component.decoded("DTSTART"), now.tzinfo or dt.UTC)
                 if start is None or not (day_start <= start < day_end):
                     continue
                 end_raw = component.get("DTEND")
-                end, _ = _datetime(end_raw.dt, now.tzinfo or dt.timezone.utc) if end_raw else (None, False)
+                end, _ = _datetime(end_raw.dt, now.tzinfo or dt.UTC) if end_raw else (None, False)
                 events.append(AgendaItem(
                     title=str(component.get("SUMMARY") or "Sans titre"),
                     start=start, end=end, all_day=all_day,

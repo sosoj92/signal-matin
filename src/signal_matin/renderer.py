@@ -12,8 +12,13 @@ import mimetypes
 from pathlib import Path
 
 from .models import (
-    AgendaItem, DensityMode, DigestItem, MorningEdition, NewsItem,
-    Recommendation, TaskItem,
+    AgendaItem,
+    DensityMode,
+    DigestItem,
+    MorningEdition,
+    NewsItem,
+    Recommendation,
+    TaskItem,
 )
 
 ROOT = Path(__file__).resolve().parents[2]

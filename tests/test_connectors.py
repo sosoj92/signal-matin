@@ -3,7 +3,6 @@ import datetime as dt
 from signal_matin.connectors.rss import collect_rss
 from signal_matin.models import DataState
 
-
 RSS = b"""<?xml version="1.0"?><rss><channel>
 <item><title>Une information de test</title><link>https://example.org/a</link>
 <description>Un resume entierement fictif pour le test du connecteur.</description>
@@ -13,7 +12,7 @@ RSS = b"""<?xml version="1.0"?><rss><channel>
 
 def test_rss_is_normalized(monkeypatch):
     monkeypatch.setattr("signal_matin.connectors.rss._payload", lambda _url: RSS)
-    now = dt.datetime(2026, 9, 26, 8, tzinfo=dt.timezone.utc)
+    now = dt.datetime(2026, 9, 26, 8, tzinfo=dt.UTC)
     items, status = collect_rss([
         {"name": "Source test", "category": "Monde", "url": "https://example.org/rss"}
     ], now)

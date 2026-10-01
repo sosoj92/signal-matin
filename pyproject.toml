@@ -30,7 +30,7 @@ google = [
   "google-auth-httplib2>=0.2",
   "google-auth-oauthlib>=1.2",
 ]
-dev = ["pytest>=8.0"]
+dev = ["pytest>=8.0", "pytest-cov>=5.0", "ruff>=0.6"]
 
 [project.scripts]
 signal-matin = "signal_matin.cli:main"
@@ -50,3 +50,27 @@ packages = ["src/signal_matin"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+
+[tool.ruff]
+# Config explicite pour que la CI soit deterministe, independamment de tout
+# fichier ruff global present sur la machine du contributeur.
+target-version = "py311"
+line-length = 100
+src = ["src"]
+
+[tool.ruff.lint]
+# Ruleset volontairement cible : erreurs reelles + tri des imports + modernisation,
+# sans imposer de reformatage massif du style existant.
+select = ["E", "F", "I", "UP", "B", "W"]
+ignore = [
+  "E501",   # longueur de ligne : ressort du formateur, non impose dans cette PR
+  "UP042",  # str + Enum -> StrEnum : change la serialisation, comportement preserve
+  "UP036",  # blocs sys.version_info : gardes defensifs volontaires des scripts
+]
+
+[tool.coverage.run]
+source = ["signal_matin"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true

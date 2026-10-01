@@ -32,7 +32,7 @@ def test_every_module_can_be_absent():
         }
     }
     edition = build_live(
-        config, now=dt.datetime(2026, 9, 26, 8, tzinfo=dt.timezone.utc))
+        config, now=dt.datetime(2026, 9, 26, 8, tzinfo=dt.UTC))
     assert edition.weather is None
     assert edition.agenda == []
     assert edition.news.lead is None

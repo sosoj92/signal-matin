@@ -3,13 +3,29 @@ from __future__ import annotations
 
 import datetime as dt
 
-from .models import (
-    AgendaItem, DataSourceStatus, DataState, DensityMode, DigestItem, EditionMeta,
-    Extras, Illustration, Importance, MorningEdition, NewsBundle, NewsItem,
-    PersonalBlock, QuizBlock, QuoteBlock, Recommendation, SourceRef, TaskItem,
-    WeatherBlock, WordOfTheDay,
-)
 from .daily_learning import construire_apprentissage_du_jour
+from .models import (
+    AgendaItem,
+    DataSourceStatus,
+    DataState,
+    DensityMode,
+    DigestItem,
+    EditionMeta,
+    Extras,
+    Illustration,
+    Importance,
+    MorningEdition,
+    NewsBundle,
+    NewsItem,
+    PersonalBlock,
+    QuizBlock,
+    QuoteBlock,
+    Recommendation,
+    SourceRef,
+    TaskItem,
+    WeatherBlock,
+    WordOfTheDay,
+)
 
 
 def _source(date: dt.date, rubrique: str) -> SourceRef:

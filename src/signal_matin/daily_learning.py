@@ -10,7 +10,11 @@ import unicodedata
 from dataclasses import dataclass
 
 from .models import (
-    CrosswordEntry, CrosswordPuzzle, LearningPage, MathChallenge, WordOfTheDay,
+    CrosswordEntry,
+    CrosswordPuzzle,
+    LearningPage,
+    MathChallenge,
+    WordOfTheDay,
 )
 
 

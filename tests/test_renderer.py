@@ -9,7 +9,6 @@ from signal_matin.normalizer import normaliser_edition
 from signal_matin.pdf import generer_pdf, inspecter_html
 from signal_matin.renderer import render_html
 
-
 EXPECTED_PAGES = {
     DensityMode.COMPACT: 4,
     DensityMode.STANDARD: 7,
