@@ -45,6 +45,10 @@ def _truncate(value: str, limit: int) -> str:
     value = " ".join(str(value or "").split())
     if len(value) <= limit:
         return value
+    # Couper de préférence à la fin d'une phrase, si elle garde l'essentiel.
+    sentence_end = max(value.rfind(mark, 0, limit + 1) for mark in (". ", "! ", "? "))
+    if sentence_end >= limit * 0.55:
+        return value[:sentence_end + 1]
     short = value[:limit].rsplit(" ", 1)[0].rstrip(" ,;:-")
     return short + "..."
 
