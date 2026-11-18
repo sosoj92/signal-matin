@@ -72,12 +72,22 @@ def _ereader_paths(
     )
 
 
+def _apply_paper_identity(edition, config: dict) -> None:
+    """La démo reprend le titre, sous-titre et devise choisis dans config.yaml."""
+    for field in ("title", "subtitle", "motto"):
+        value = setting(config, f"paper.{field}", None)
+        if value:
+            setattr(edition.edition, field, str(value))
+
+
 def _edition(args, config: dict):
     if args.input:
         return charger_edition(Path(args.input), mode=args.mode)
     demo = args.demo or (not args.live and bool(config.get("demo", not config)))
     if demo:
-        return normaliser_edition(construire_demo(args.date), mode=args.mode)
+        edition = construire_demo(args.date)
+        _apply_paper_identity(edition, config)
+        return normaliser_edition(edition, mode=args.mode)
     now = dt.datetime.combine(args.date, dt.datetime.now().astimezone().timetz())
     return build_live(config, now=now, mode=args.mode)
 
