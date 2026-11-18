@@ -34,8 +34,15 @@ La méthode sans Git :
 
 1. clique sur le bouton vert **Code** en haut de cette page ;
 2. choisis **Download ZIP** ;
-3. décompresse le ZIP ;
-4. ouvre le dossier `signal-matin` obtenu.
+3. fais un clic droit sur le ZIP, puis **Extraire tout…** (ne travaille pas
+   directement dans le ZIP ouvert, Windows le traite comme un dossier en
+   lecture seule) ;
+4. ouvre le dossier obtenu (il s'appelle souvent `signal-matin-main`).
+
+> **Windows : choisis un dossier simple.** Place le projet par exemple dans
+> `C:\Users\<ton nom>\signal-matin`, **pas** dans OneDrive, ni dans un dossier
+> synchronisé : OneDrive et la protection des dossiers de Windows verrouillent
+> des fichiers pendant l'installation et provoquent `[WinError 5] Accès refusé`.
 
 Ou, si Git est déjà installé :
 
@@ -88,7 +95,26 @@ Le programme :
 5. vérifie l'installation ;
 6. ouvre un vrai journal fictif dans le navigateur.
 
-Il ne lance jamais d'impression pendant l'installation.
+Il ne lance jamais d'impression pendant l'installation. Il n'a pas besoin des
+droits administrateur : ouvre un terminal normal.
+
+#### `[WinError 5] Accès refusé` sous Windows
+
+Windows a empêché Python d'écrire un fichier. Dans l'ordre :
+
+1. ferme les autres terminaux et fenêtres Signal Matin. Si tu as installé la
+   liseuse, arrête sa tâche :
+   `Stop-ScheduledTask -TaskName "Signal Matin - liseuse"` ;
+2. vérifie que le dossier n'est pas dans OneDrive, sur le Bureau ou dans
+   Documents ; sinon déplace-le dans `C:\Users\<ton nom>\signal-matin` ;
+3. si **Sécurité Windows › Protection contre les ransomwares › Dispositif
+   d'accès contrôlé aux dossiers** est activé, autorise `python.exe` ou change de
+   dossier ;
+4. relance `python scripts/setup.py` : un `.venv` laissé incomplet par l'essai
+   précédent est supprimé et recréé automatiquement.
+
+Si Python a été installé depuis le Microsoft Store et que l'erreur persiste,
+installe-le plutôt depuis [python.org](https://www.python.org/downloads/).
 
 ### 4. Vérifier ou réparer
 
