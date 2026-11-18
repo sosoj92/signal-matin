@@ -87,6 +87,7 @@ def run(command: list[str], label: str) -> None:
             cwd=ROOT,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
+            env={**os.environ, "PYTHONIOENCODING": "utf-8"},
             text=True,
             encoding="utf-8",
             errors="replace",
@@ -193,7 +194,18 @@ def install(args: argparse.Namespace) -> None:
     print("Pour obtenir un PDF : remplace --preview par --generate.")
 
 
+def _safe_console() -> None:
+    # Une console Windows en cp1252 ne sait pas afficher certains caracteres (barre de progression
+    # de Playwright, guillemets...) : on les remplace au lieu de faire planter l'installation.
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(errors="replace")
+        except (AttributeError, ValueError):
+            pass
+
+
 def main() -> int:
+    _safe_console()
     parser = argparse.ArgumentParser(description="Installation guidee de Signal Matin")
     parser.add_argument("--yes", action="store_true", help="ne pose aucune question")
     parser.add_argument("--skip-preview", action="store_true", help="n'ouvre pas la demo")
