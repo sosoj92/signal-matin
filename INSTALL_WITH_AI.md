@@ -16,6 +16,11 @@ python scripts/setup.py
 Le script crée un environnement isolé, installe les dépendances et ouvre une
 édition fictive. Aucune clé API et aucune imprimante ne sont nécessaires.
 
+Sous Windows, extrayez d'abord le ZIP et placez le dossier hors de OneDrive (par
+exemple `C:\Users\<votre nom>\signal-matin`). En cas de `[WinError 5] Accès
+refusé`, suivez la section dédiée du README : le script affiche aussi les
+causes probables et il suffit ensuite de le relancer.
+
 ## Prompt à copier dans votre IA
 
 Copiez le texte ci-dessous dans l'assistant de votre choix :
@@ -28,7 +33,9 @@ Accompagne-moi comme une personne débutante, une seule étape à la fois. Comme
 par identifier mon système (Windows, macOS ou Linux), vérifier Python 3.11+, puis
 faire cloner ou télécharger le dépôt. Utilise d'abord le programme officiel
 `python scripts/setup.py`. Si une commande échoue, explique le message en mots
-simples et donne seulement la prochaine commande nécessaire.
+simples et donne seulement la prochaine commande nécessaire. Sous Windows, en
+cas de « [WinError 5] Accès refusé », suis la section dédiée du README (pas de
+terminal administrateur, dossier hors OneDrive, autres fenêtres fermées).
 
 Objectif initial : ouvrir l'édition de démonstration, sans aucune API et sans
 impression. Ensuite, fais exécuter `python scripts/doctor.py`, puis aide-moi à

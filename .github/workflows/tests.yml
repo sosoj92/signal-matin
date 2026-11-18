@@ -19,3 +19,15 @@ jobs:
       - run: pip install -e ".[dev]"
       - run: playwright install --with-deps chromium
       - run: pytest
+
+  windows-setup:
+    # Rejoue l'installation guidee du README sur un vrai Windows.
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: python scripts/setup.py --yes --skip-preview
+      # Une seconde execution ne doit pas buter sur des fichiers deja installes.
+      - run: python scripts/setup.py --yes --skip-preview
